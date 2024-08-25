@@ -17,11 +17,8 @@ class Date:
             self.day = day
 
     def __sub__(self, other):
-        date = datetime.date.today
-        year= timedelta(self.year,date)
-        month= timedelta(self.month,date)
-        day = timedelta(self.day,date)
-        time = int(year)+int(month)+int(day)
+        time = datetime(year,month,day)
+        minutes= 
         return time
 
 def main():
