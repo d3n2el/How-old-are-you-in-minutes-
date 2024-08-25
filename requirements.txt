@@ -1,0 +1,1 @@
+you need to install inflect with pip install inflect. Im using other libraries but all are integrated in python. Run the file in a python interpreter and thats it
