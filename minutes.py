@@ -1,5 +1,8 @@
 from datetime import datetime, timedelta,date
 import re
+import inflect
+import sys
+p=inflect.engine()
 class Date:
     def __init__(self, time=None):
         self.time = time if time else date.today()
@@ -11,11 +14,13 @@ class Date:
         return f"{self.time}"
 
 def main():
-    print(convert(input("Date of birth: ")))
+    print(get_date(input("Date of birth: ")))
 
-def convert(t):
+def get_date(t):
     # need to elaborate input and split it
     time = re.search(r"([0-9]{4})-([0-9]{2})-([0-9]{2})", t)
+    if time == None:
+        sys.exit("Invalid input")
     year,month,day = time.groups()
     #validate input through date module
     try:
@@ -23,21 +28,17 @@ def convert(t):
         year= int(year)
         month= int(month)
         day = int(day)
-        d = date(year,month,day)
-        final= date_ - d
-        return final
-
+        birth_date = Date(date(year, month, day))
+        today = Date(date_)
+        minutes_diff = today - birth_date
     except ValueError as e:
         sys.exit(f"{e}: Invalid Date")
+    else:
+        return f"{p.number_to_words(minutes_diff, andword="")} minutes".capitalize()
 
 
-    # If no exception is raised, the format is correct
-    # Handle the error if the format is incorrect
-    #if not valid,raise valueError
-    #else: pass the data to Data
-    #now i need to understand where i use inflect
-    # will use inflect to return the written minutes properly
-    #acutally return the value so that main can print it
+
+
 
 
 
